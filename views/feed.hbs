@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Лента текстов для расчёта лексического разнообразия">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body class="app-body app-body--dark">
+  <main class="phone-shell phone-shell--feed">
+    <article class="feed-card" data-image-url="{{authorText.imageUrl}}" data-video-url="{{authorText.videoUrl}}">
+      <video class="feed-card__video" autoplay muted loop playsinline controls poster="{{authorText.imageUrl}}">
+        <source src="{{authorText.videoUrl}}" type="video/webm">
+        Ваш браузер не поддерживает видео.
+      </video>
+      <div class="feed-card__shade"></div>
+
+      <header class="feed-card__header">
+        <span class="brand-mark">TTR</span>
+        <span class="status-chip">Опубликован</span>
+      </header>
+
+      <section class="feed-card__content">
+        <p class="eyebrow">{{authorText.authorName}} · {{authorText.publicationYear}}</p>
+        <h1>{{authorText.title}}</h1>
+        <p class="feed-card__excerpt">{{authorText.excerpt}}</p>
+
+        <dl class="metric-row">
+          <div class="metric">
+            <dt>Токены</dt>
+            <dd>{{authorText.tokenCount}}</dd>
+          </div>
+          <div class="metric">
+            <dt>Уникальные</dt>
+            <dd>{{authorText.uniqueTypeCount}}</dd>
+          </div>
+          <div class="metric metric--accent">
+            <dt>TTR</dt>
+            <dd>{{authorText.ttrPercent}}</dd>
+          </div>
+        </dl>
+
+        <div class="feed-actions">
+          <span class="like-pill" aria-label="Количество отметок">♥ {{authorText.likeCount}}</span>
+          <a class="primary-button" href="/author-texts/{{nextAuthorTextId}}">Следующий текст →</a>
+        </div>
+      </section>
+    </article>
+    {{> bottom_nav}}
+  </main>
+</body>
+</html>

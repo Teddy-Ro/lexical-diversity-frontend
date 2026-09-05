@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Корпус текстов для TTR-анализа">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body class="app-body">
+  <main class="phone-shell page-shell">
+    <header class="page-header page-header--stacked">
+      <div>
+        <p class="eyebrow eyebrow--dark">RuLingva · TTR</p>
+        <h1>Корпус текстов</h1>
+        <p class="page-header__lead">Сравните лексическое разнообразие русской прозы.</p>
+      </div>
+    </header>
+
+    <form class="filter-form" action="/author-texts" method="get">
+      <label for="minUniqueWords">Минимум уникальных слов</label>
+      <div class="filter-form__row">
+        <input id="minUniqueWords" name="minUniqueWords" type="number" min="0" step="1" value="{{minUniqueWords}}" placeholder="Например, 9000">
+        <button class="primary-button" type="submit">Показать</button>
+      </div>
+      <a class="filter-form__reset" href="/author-texts">Сбросить фильтр</a>
+    </form>
+
+    {{#if hasAuthorTexts}}
+      <section class="text-grid" aria-label="Опубликованные тексты">
+        {{#each authorTexts}}
+          <a class="text-card" href="/author-texts/{{this.id}}" data-video-url="{{this.videoUrl}}">
+            <img src="{{this.imageUrl}}" alt="Обложка: {{this.title}}" loading="lazy">
+            <span class="text-card__body">
+              <span class="text-card__author">{{this.authorName}}</span>
+              <strong>{{this.title}}</strong>
+              <span class="text-card__stats">
+                <span>Типы: {{this.uniqueTypeCount}}</span>
+                <span>♥ {{this.likeCount}}</span>
+              </span>
+              <span class="text-card__ttr">TTR {{this.ttr}}</span>
+            </span>
+          </a>
+        {{/each}}
+      </section>
+    {{else}}
+      <section class="empty-state">
+        <strong>Тексты не найдены</strong>
+        <p>Уменьшите минимальное количество уникальных слов.</p>
+      </section>
+    {{/if}}
+
+    {{> bottom_nav}}
+  </main>
+</body>
+</html>

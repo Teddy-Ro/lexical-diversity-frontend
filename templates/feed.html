@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Лента текстов для TTR-анализа">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body class="feed-body">
+  <main class="phone phone--feed">
+    <article class="feed-card" data-image-url="{{ author_text.image_url }}"
+             data-video-url="{{ author_text.video_url }}">
+      <video class="feed-card__video" autoplay muted loop playsinline
+             poster="{{ author_text.image_url }}">
+        <source src="{{ author_text.video_url }}" type="video/webm">
+        Ваш браузер не поддерживает видео.
+      </video>
+      <div class="feed-card__shade"></div>
+
+      <header class="feed-card__header">
+        <span class="feed-logo">Lexical Lab</span>
+        <span class="feed-status">Опубликован</span>
+      </header>
+
+      <section class="feed-card__content">
+        <p class="feed-author">{{ author_text.author_name }} · {{ author_text.publication_year }}</p>
+        <h1>{{ author_text.title }}</h1>
+        <p>{{ author_text.excerpt }}</p>
+
+        <dl class="metrics">
+          <div><dt>Токены</dt><dd>{{ author_text.token_count }}</dd></div>
+          <div><dt>Типы</dt><dd>{{ author_text.unique_type_count }}</dd></div>
+          <div><dt>TTR</dt><dd>{{ author_text.ttr_percent }}</dd></div>
+        </dl>
+
+        <div class="feed-actions">
+          <span class="like">♥ {{ author_text.like_count }}</span>
+          <a class="button button--light" href="/author-texts/{{ author_text.id }}?next=true">Следующий →</a>
+        </div>
+      </section>
+    </article>
+
+    {% include "_bottom_nav.html" %}
+  </main>
+</body>
+</html>

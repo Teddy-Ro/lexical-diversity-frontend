@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
-  <rect width="800" height="1000" fill="#071C2E"/><rect x="60" y="60" width="680" height="880" fill="none" stroke="#18A3A8" stroke-width="10"/>
-  <path d="M135 250h530M135 295h400M135 340h485" stroke="#F3F8FA" stroke-width="12" opacity=".18"/>
-  <text x="110" y="145" fill="#18A3A8" font-family="serif" font-size="30">F. DOSTOEVSKY</text>
+  <rect width="800" height="1000" fill="#09090B"/><rect x="60" y="60" width="680" height="880" fill="none" stroke="#A855F7" stroke-width="10"/>
+  <path d="M135 250h530M135 295h400M135 340h485" stroke="#FAF5FF" stroke-width="12" opacity=".18"/>
+  <text x="110" y="145" fill="#A855F7" font-family="serif" font-size="30">F. DOSTOEVSKY</text>
   <text x="110" y="605" fill="white" font-family="serif" font-size="57" font-weight="700">Преступление</text>
   <text x="110" y="680" fill="white" font-family="serif" font-size="57" font-weight="700">и наказание</text>
-  <text x="110" y="825" fill="#18A3A8" font-family="sans-serif" font-size="28">TTR корпус · 1866</text>
+  <text x="110" y="825" fill="#A855F7" font-family="sans-serif" font-size="28">TTR корпус · 1866</text>
 </svg>

@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
-  <defs><linearGradient id="g" y2="1"><stop stop-color="#18A3A8"/><stop offset="1" stop-color="#0B2F4F"/></linearGradient></defs>
-  <rect width="800" height="1000" fill="url(#g)"/><path d="M0 520c180-90 330 90 480 0s250-30 320 30v450H0z" fill="#F3F8FA" opacity=".14"/>
-  <circle cx="175" cy="250" r="95" fill="none" stroke="#BFEFF0" stroke-width="20" opacity=".65"/>
-  <text x="80" y="120" fill="#BFEFF0" font-family="serif" font-size="32">ANTON CHEKHOV</text>
+  <defs><linearGradient id="g" y2="1"><stop stop-color="#A855F7"/><stop offset="1" stop-color="#18181B"/></linearGradient></defs>
+  <rect width="800" height="1000" fill="url(#g)"/><path d="M0 520c180-90 330 90 480 0s250-30 320 30v450H0z" fill="#FAF5FF" opacity=".14"/>
+  <circle cx="175" cy="250" r="95" fill="none" stroke="#FCE7F3" stroke-width="20" opacity=".65"/>
+  <text x="80" y="120" fill="#FCE7F3" font-family="serif" font-size="32">ANTON CHEKHOV</text>
   <text x="80" y="650" fill="white" font-family="serif" font-size="72" font-weight="700">Дама</text>
   <text x="80" y="730" fill="white" font-family="serif" font-size="72" font-weight="700">с собачкой</text>
-  <text x="80" y="840" fill="#BFEFF0" font-family="sans-serif" font-size="28">TTR корпус · 1899</text>
+  <text x="80" y="840" fill="#FCE7F3" font-family="sans-serif" font-size="28">TTR корпус · 1899</text>
 </svg>

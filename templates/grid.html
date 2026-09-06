@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Корпус текстов для TTR-анализа">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <main class="phone page">
+    <header class="hero">
+      <span class="logo">Lexical Lab</span>
+      <p class="eyebrow">История и культура</p>
+      <h1>Корпус текстов</h1>
+      <p>Сравните лексическое разнообразие русской прозы.</p>
+    </header>
+
+    <form class="filter" action="/author-texts" method="get">
+      <label for="min-unique-words">Минимум уникальных слов</label>
+      <div class="filter__row">
+        <input id="min-unique-words" name="min_unique_words" type="number" min="0" step="1"
+               value="{{ min_unique_words }}" placeholder="Например, 9000">
+        <button class="button" type="submit">Показать</button>
+      </div>
+      <a class="text-link" href="/author-texts">Сбросить</a>
+    </form>
+
+    {% if author_texts %}
+      <section class="text-grid" aria-label="Опубликованные тексты">
+        {% for author_text in author_texts %}
+          <a class="text-card" href="/author-texts/{{ author_text.id }}"
+             data-video-url="{{ author_text.video_url }}">
+            <img src="{{ author_text.image_url }}" alt="Обложка: {{ author_text.title }}" loading="lazy">
+            <span class="text-card__body">
+              <span class="muted">{{ author_text.author_name }}</span>
+              <strong>{{ author_text.title }}</strong>
+              <span class="text-card__stats">
+                <span>{{ author_text.unique_type_count }} типов</span>
+                <span>♥ {{ author_text.like_count }}</span>
+              </span>
+              <span class="badge">TTR {{ author_text.ttr }}</span>
+            </span>
+          </a>
+        {% endfor %}
+      </section>
+    {% else %}
+      <section class="empty-state">
+        <strong>Тексты не найдены</strong>
+        <p>Уменьшите минимальное количество уникальных слов.</p>
+      </section>
+    {% endif %}
+
+    {% include "_bottom_nav.html" %}
+  </main>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Черновик карточки авторского текста">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <main class="phone page">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">Текстовый корпус</p>
+        <h1>Новая карточка</h1>
+      </div>
+      <span class="badge">Черновик</span>
+    </header>
+
+    <img class="draft-cover" src="{{ author_text.image_url }}" alt="Обложка: {{ author_text.title }}">
+
+    <form class="editor">
+      <label>Название
+        <input name="title" value="{{ author_text.title }}">
+      </label>
+      <label>Автор
+        <input name="author_name" value="{{ author_text.author_name }}">
+      </label>
+      <label>Год публикации
+        <input type="number" name="publication_year" value="{{ author_text.publication_year }}">
+      </label>
+      <label>URL изображения в MinIO
+        <input type="url" name="image_url" value="{{ author_text.image_url }}">
+      </label>
+      <label>URL видео в MinIO
+        <input type="url" name="video_url" value="{{ author_text.video_url }}">
+      </label>
+      <div class="editor__split">
+        <label>Всего токенов
+          <input type="number" name="token_count" value="{{ author_text.token_count }}">
+        </label>
+        <label>Уникальных типов
+          <input type="number" name="unique_type_count" value="{{ author_text.unique_type_count }}">
+        </label>
+      </div>
+      <label>Краткое описание
+        <textarea name="excerpt" rows="4">{{ author_text.excerpt }}</textarea>
+      </label>
+      <button class="button button--wide" type="button">Сохранение будет в лабораторной №2</button>
+    </form>
+
+    {% include "_bottom_nav.html" %}
+  </main>
+</body>
+</html>

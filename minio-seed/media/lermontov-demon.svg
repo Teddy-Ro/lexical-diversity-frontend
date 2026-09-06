@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
-  <rect width="800" height="1000" fill="#0B2F4F"/><path d="M0 800 800 200v800H0z" fill="#18A3A8" opacity=".3"/>
-  <text x="90" y="140" fill="#BFEFF0" font-family="serif" font-size="32">M. LERMONTOV</text>
+  <rect width="800" height="1000" fill="#18181B"/><path d="M0 800 800 200v800H0z" fill="#A855F7" opacity=".3"/>
+  <text x="90" y="140" fill="#FCE7F3" font-family="serif" font-size="32">M. LERMONTOV</text>
   <text x="90" y="670" fill="white" font-family="serif" font-size="98" font-weight="700">Демон</text>
-  <text x="90" y="820" fill="#BFEFF0" font-family="sans-serif" font-size="28">Удалён из корпуса</text>
+  <text x="90" y="820" fill="#FCE7F3" font-family="sans-serif" font-size="28">Удалён из корпуса</text>
 </svg>

@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000">
-  <rect width="800" height="1000" fill="#F3F8FA"/><circle cx="620" cy="240" r="220" fill="#18A3A8" opacity=".16"/>
-  <rect x="65" y="65" width="670" height="870" rx="28" fill="none" stroke="#0B2F4F" stroke-width="10"/>
-  <text x="100" y="145" fill="#0B2F4F" font-family="serif" font-size="32">IVAN TURGENEV</text>
-  <text x="100" y="610" fill="#0B2F4F" font-family="serif" font-size="82" font-weight="700">Отцы</text>
-  <text x="100" y="700" fill="#0B2F4F" font-family="serif" font-size="82" font-weight="700">и дети</text>
-  <text x="100" y="835" fill="#0B777C" font-family="sans-serif" font-size="28">Черновик · 1862</text>
+  <rect width="800" height="1000" fill="#FAF5FF"/><circle cx="620" cy="240" r="220" fill="#A855F7" opacity=".16"/>
+  <rect x="65" y="65" width="670" height="870" rx="28" fill="none" stroke="#18181B" stroke-width="10"/>
+  <text x="100" y="145" fill="#18181B" font-family="serif" font-size="32">IVAN TURGENEV</text>
+  <text x="100" y="610" fill="#18181B" font-family="serif" font-size="82" font-weight="700">Отцы</text>
+  <text x="100" y="700" fill="#18181B" font-family="serif" font-size="82" font-weight="700">и дети</text>
+  <text x="100" y="835" fill="#7E22CE" font-family="sans-serif" font-size="28">Черновик · 1862</text>
 </svg>

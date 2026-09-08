@@ -238,7 +238,7 @@ textarea { resize: vertical; }
 .draft-cover {
   display: block;
   width: 100%;
-  max-height: 250px;
+  aspect-ratio: 3 / 4;
   margin-bottom: 18px;
   object-fit: cover;
   object-position: 50% 30%;
@@ -316,10 +316,11 @@ textarea { resize: vertical; }
   pointer-events: none;
   background: linear-gradient(
     to bottom,
-    rgb(9 9 11 / 25%),
-    transparent 30%,
-    rgb(9 9 11 / 94%) 44%,
-    var(--ink) 50%
+    rgb(9 9 11 / 14%) 0%,
+    transparent 38%,
+    rgb(9 9 11 / 45%) 58%,
+    rgb(9 9 11 / 86%) 75%,
+    rgb(9 9 11 / 100%) 100%
   );
 }
 

@@ -1,13 +1,16 @@
-<nav class="bottom-nav" aria-label="Основная навигация">
-  <a class="bottom-nav__item{% if active_feed %} bottom-nav__item--active{% endif %}" href="/author-texts/1">
+<nav class="ttr-bottom-nav" aria-label="Основная навигация TTR">
+  <a class="ttr-bottom-nav__item{% if ttr_active_feed %} ttr-bottom-nav__item--active{% endif %}"
+     href="/ttr-texts/1">
     <span aria-hidden="true">▶</span>
     <span>Лента</span>
   </a>
-  <a class="bottom-nav__item{% if active_draft %} bottom-nav__item--active{% endif %}" href="/author-texts/draft">
+  <a class="ttr-bottom-nav__item{% if ttr_active_add %} ttr-bottom-nav__item--active{% endif %}"
+     href="/ttr-texts/add">
     <span aria-hidden="true">＋</span>
     <span>Добавить</span>
   </a>
-  <a class="bottom-nav__item{% if active_grid %} bottom-nav__item--active{% endif %}" href="/author-texts">
+  <a class="ttr-bottom-nav__item{% if ttr_active_grid %} ttr-bottom-nav__item--active{% endif %}"
+     href="/ttr-texts">
     <span aria-hidden="true">▦</span>
     <span>Корпус</span>
   </a>

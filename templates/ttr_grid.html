@@ -5,53 +5,75 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Корпус текстов для TTR-анализа">
   <title>{{ title }}</title>
-  <link rel="stylesheet" href="/assets/styles.css?v=3">
+  <link rel="stylesheet" href="/ttr-assets/ttr_styles.css">
 </head>
-<body>
-  <main class="phone page">
-    <header class="hero">
-      <span class="logo">Lexical Lab</span>
-      <p class="eyebrow">История и культура</p>
+<body class="ttr-page-body">
+  <main class="ttr-phone ttr-page">
+    <header class="ttr-hero">
       <h1>Корпус текстов</h1>
-      <p>Сравните лексическое разнообразие русской прозы.</p>
+      <p>Сравните длину и словарный состав произведений.</p>
     </header>
 
-    <form class="filter" action="/author-texts" method="get">
-      <label for="min-unique-words">Минимум уникальных слов</label>
-      <div class="filter__row">
-        <input id="min-unique-words" name="min_unique_words" type="number" min="0" step="1"
-               value="{{ min_unique_words }}" placeholder="Например, 9000">
-        <button class="button" type="submit">Показать</button>
+    <form class="ttr-filter" action="/ttr-texts" method="get">
+      <div class="ttr-filter__heading">
+        <label for="ttr-min-text-length">Минимальная длина текста</label>
+        <output for="ttr-min-text-length">{{ min_text_length }} токенов</output>
       </div>
-      <a class="text-link" href="/author-texts">Сбросить</a>
+
+      <input class="ttr-filter__range" id="ttr-min-text-length"
+             name="min_text_length" type="range"
+             min="0" max="{{ max_text_length }}" step="1000"
+             value="{{ min_text_length }}" list="ttr-text-length-ticks">
+
+      <datalist id="ttr-text-length-ticks">
+        {% for tick in text_length_ticks %}
+          <option value="{{ tick.value }}" label="{{ tick.label }}"></option>
+        {% endfor %}
+      </datalist>
+
+      <div class="ttr-filter__scale" aria-hidden="true">
+        <span>0</span>
+        <span>{{ max_text_length_compact }}</span>
+      </div>
+
+      <div class="ttr-filter__actions">
+        <button class="ttr-button" type="submit">Применить</button>
+        <a class="ttr-text-link" href="/ttr-texts">Сбросить</a>
+      </div>
     </form>
 
-    {% if author_texts %}
-      <section class="text-grid" aria-label="Опубликованные тексты">
-        {% for author_text in author_texts %}
-          <a class="text-card" href="/author-texts/{{ author_text.id }}"
-             data-video-url="{{ author_text.video_url }}">
-            <img src="{{ author_text.image_url }}" alt="Обложка: {{ author_text.title }}" loading="lazy">
-            <span class="text-card__body">
-              <span class="muted">{{ author_text.author_name }}</span>
-              <strong>{{ author_text.title }}</strong>
-              <span class="text-card__stats">
-                <span>{{ author_text.unique_type_count }} типов</span>
-                <span>♥ {{ author_text.like_count }}</span>
+    {% if ttr_texts %}
+      <section class="ttr-text-grid" aria-label="Опубликованные тексты">
+        {% for ttr_text in ttr_texts %}
+          <a class="ttr-text-card"
+             href="/ttr-texts/{{ ttr_text.ttr_text_id }}"
+             data-ttr-video-url="{{ ttr_text.ttr_video_url }}">
+            <img src="{{ ttr_text.ttr_image_url }}"
+                 alt="Обложка произведения {{ ttr_text.work_title }}"
+                 loading="lazy">
+            <span class="ttr-text-card__body">
+              <span class="ttr-muted">{{ ttr_text.author_name }}</span>
+              <strong>{{ ttr_text.work_title }}</strong>
+              <span class="ttr-text-card__metric">
+                <span>Длина</span>
+                <b title="{{ ttr_text.text_length }} токенов">{{ ttr_text.compact_text_length }}</b>
               </span>
-              <span class="badge">TTR {{ author_text.ttr }}</span>
+              <span class="ttr-text-card__metric">
+                <span>Уникальных</span>
+                <b title="{{ ttr_text.unique_token_count }} уникальных токенов">{{ ttr_text.compact_unique_token_count }}</b>
+              </span>
             </span>
           </a>
         {% endfor %}
       </section>
     {% else %}
-      <section class="empty-state">
+      <section class="ttr-empty-state">
         <strong>Тексты не найдены</strong>
-        <p>Уменьшите минимальное количество уникальных слов.</p>
+        <p>Уменьшите минимальную длину текста.</p>
       </section>
     {% endif %}
 
-    {% include "_bottom_nav.html" %}
+    {% include "_ttr_bottom_nav.html" %}
   </main>
 </body>
 </html>

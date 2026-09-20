@@ -5,43 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Лента текстов для TTR-анализа">
   <title>{{ title }}</title>
-  <link rel="stylesheet" href="/assets/styles.css?v=3">
+  <link rel="stylesheet" href="/ttr-assets/ttr_styles.css">
 </head>
-<body class="feed-body">
-  <main class="phone phone--feed">
-    <article class="feed-card" data-image-url="{{ author_text.image_url }}"
-             data-video-url="{{ author_text.video_url }}">
-      <video class="feed-card__video" autoplay muted loop playsinline
-             poster="{{ author_text.image_url }}">
-        <source src="{{ author_text.video_url }}" type="video/webm">
+<body class="ttr-page-body ttr-feed-body">
+  <main class="ttr-phone ttr-phone--feed">
+    <article class="ttr-feed-card"
+             data-ttr-image-url="{{ ttr_text.ttr_image_url }}"
+             data-ttr-video-url="{{ ttr_text.ttr_video_url }}">
+      <video class="ttr-feed-card__video" autoplay muted loop playsinline
+             poster="{{ ttr_text.ttr_image_url }}">
+        <source src="{{ ttr_text.ttr_video_url }}" type="video/webm">
         Ваш браузер не поддерживает видео.
       </video>
-      <div class="feed-card__shade"></div>
+      <div class="ttr-feed-card__shade"></div>
 
-      <header class="feed-card__header">
-        <span class="feed-logo">Lexical Lab</span>
-        <span class="feed-status">Опубликован</span>
-      </header>
-
-      <section class="feed-card__content">
-        <p class="feed-author">{{ author_text.author_name }} · {{ author_text.publication_year }}</p>
-        <h1>{{ author_text.title }}</h1>
-        <p>{{ author_text.excerpt }}</p>
-
-        <dl class="metrics">
-          <div><dt>Токены</dt><dd>{{ author_text.token_count }}</dd></div>
-          <div><dt>Типы</dt><dd>{{ author_text.unique_type_count }}</dd></div>
-          <div><dt>TTR</dt><dd>{{ author_text.ttr_percent }}</dd></div>
-        </dl>
-
-        <div class="feed-actions">
-          <span class="like">♥ {{ author_text.like_count }}</span>
-          <a class="button button--light" href="/author-texts/{{ author_text.id }}?next=true">Следующий →</a>
+      <aside class="ttr-feed-rail" aria-label="Параметры текста">
+        <div class="ttr-feed-rail__like" aria-label="Отметок нравится: {{ ttr_text.ttr_like_count }}">
+          <span class="ttr-feed-rail__icon" aria-hidden="true">♥</span>
+          <strong>{{ ttr_text.ttr_like_count }}</strong>
         </div>
+
+        <div class="ttr-feed-rail__metric"
+             title="{{ ttr_text.unique_token_count }} уникальных токенов">
+          <strong>{{ ttr_text.compact_unique_token_count }}</strong>
+          <span>уник.<br>токенов</span>
+        </div>
+
+        <div class="ttr-feed-rail__metric"
+             title="Длина текста: {{ ttr_text.text_length }} токенов">
+          <strong>{{ ttr_text.compact_text_length }}</strong>
+          <span>длина<br>текста</span>
+        </div>
+
+        <a class="ttr-feed-rail__next"
+           href="/ttr-texts/{{ ttr_text.ttr_text_id }}?next=true"
+           aria-label="Показать следующий текст">→</a>
+      </aside>
+
+      <section class="ttr-feed-copy">
+        <h1>{{ ttr_text.work_title }}</h1>
+        <input class="ttr-feed-copy__toggle" type="checkbox"
+               id="ttr-description-{{ ttr_text.ttr_text_id }}">
+        <p class="ttr-feed-copy__description">{{ ttr_text.short_description }}</p>
+        <label class="ttr-feed-copy__more"
+               for="ttr-description-{{ ttr_text.ttr_text_id }}">
+          <span class="ttr-feed-copy__more-label">Ещё</span>
+          <span class="ttr-feed-copy__less-label">Скрыть</span>
+        </label>
       </section>
     </article>
 
-    {% include "_bottom_nav.html" %}
+    {% include "_ttr_bottom_nav.html" %}
   </main>
 </body>
 </html>

@@ -3,53 +3,62 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Черновик карточки авторского текста">
+  <meta name="description" content="Добавление текста для TTR-анализа">
   <title>{{ title }}</title>
-  <link rel="stylesheet" href="/assets/styles.css?v=3">
+  <link rel="stylesheet" href="/ttr-assets/ttr_styles.css">
 </head>
-<body>
-  <main class="phone page">
-    <header class="page-header">
-      <div>
-        <p class="eyebrow">Текстовый корпус</p>
-        <h1>Новая карточка</h1>
-      </div>
-      <span class="badge">Черновик</span>
+<body class="ttr-page-body">
+  <main class="ttr-phone ttr-page">
+    <header class="ttr-page-header">
+      <h1>Добавление</h1>
     </header>
 
-    <img class="draft-cover" src="{{ author_text.image_url }}" alt="Обложка: {{ author_text.title }}">
+    <form class="ttr-editor">
+      <section class="ttr-file-picker" aria-label="Выбор файлов текста">
+        <label class="ttr-file-picker__card">
+          <span class="ttr-file-picker__plus" aria-hidden="true">+</span>
+          <span>Видео</span>
+          <input class="ttr-file-picker__input" type="file"
+                 name="ttr_video_file" accept="video/*">
+        </label>
 
-    <form class="editor">
-      <label>Название
-        <input name="title" value="{{ author_text.title }}">
-      </label>
-      <label>Автор
-        <input name="author_name" value="{{ author_text.author_name }}">
-      </label>
-      <label>Год публикации
-        <input type="number" name="publication_year" value="{{ author_text.publication_year }}">
-      </label>
-      <label>URL изображения в MinIO
-        <input type="url" name="image_url" value="{{ author_text.image_url }}">
-      </label>
-      <label>URL видео в MinIO
-        <input type="url" name="video_url" value="{{ author_text.video_url }}">
-      </label>
-      <div class="editor__split">
-        <label>Всего токенов
-          <input type="number" name="token_count" value="{{ author_text.token_count }}">
+        <label class="ttr-file-picker__card">
+          <span class="ttr-file-picker__plus" aria-hidden="true">+</span>
+          <span>Изображение</span>
+          <input class="ttr-file-picker__input" type="file"
+                 name="ttr_image_file" accept="image/*">
         </label>
-        <label>Уникальных типов
-          <input type="number" name="unique_type_count" value="{{ author_text.unique_type_count }}">
+
+        <label class="ttr-file-picker__card">
+          <span class="ttr-file-picker__plus" aria-hidden="true">+</span>
+          <span>Текст</span>
+          <input class="ttr-file-picker__input" type="file"
+                 name="ttr_text_file" accept=".txt,text/plain">
         </label>
-      </div>
-      <label>Краткое описание
-        <textarea name="excerpt" rows="4">{{ author_text.excerpt }}</textarea>
-      </label>
-      <button class="button button--wide" type="button">Сохранение будет в лабораторной №2</button>
+      </section>
+
+      <section class="ttr-editor__card">
+        <label>Название
+          <input name="work_title" value="{{ ttr_text.work_title }}">
+        </label>
+
+        <label>Автор
+          <input name="author_name" value="{{ ttr_text.author_name }}">
+        </label>
+
+        <label>Год публикации
+          <input type="number" name="publication_year"
+                 value="{{ ttr_text.publication_year }}">
+        </label>
+
+        <label>Краткое описание
+          <textarea name="short_description" rows="3">{{ ttr_text.short_description }}</textarea>
+        </label>
+
+      </section>
     </form>
 
-    {% include "_bottom_nav.html" %}
+    {% include "_ttr_bottom_nav.html" %}
   </main>
 </body>
 </html>

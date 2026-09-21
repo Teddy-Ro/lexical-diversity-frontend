@@ -5,56 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Добавление текста для TTR-анализа">
   <title>{{ title }}</title>
-  <link rel="stylesheet" href="/ttr-assets/ttr_styles.css">
+  <link rel="stylesheet" href="/ttr-assets/ttr_styles.css?v=lab2-single-form">
 </head>
 <body class="ttr-page-body">
   <main class="ttr-phone ttr-page">
     <header class="ttr-page-header">
       <h1>Добавление</h1>
+      <p>Заполните данные и текст — показатели TTR рассчитаются автоматически.</p>
     </header>
 
-    <form class="ttr-editor">
-      <section class="ttr-file-picker" aria-label="Выбор файлов текста">
+    <form class="ttr-editor"
+          action="{% if ttr_text %}/ttr-texts/{{ ttr_text.ttr_text_id }}/publish{% else %}/ttr-texts/drafts{% endif %}"
+          method="post" enctype="multipart/form-data">
+      <section class="ttr-file-picker ttr-file-picker--media" aria-label="Выбор медиа">
         <label class="ttr-file-picker__card">
           <span class="ttr-file-picker__plus" aria-hidden="true">+</span>
           <span>Видео</span>
-          <input class="ttr-file-picker__input" type="file"
-                 name="ttr_video_file" accept="video/*">
+          <input class="ttr-file-picker__input" type="file" accept="video/*">
         </label>
 
         <label class="ttr-file-picker__card">
           <span class="ttr-file-picker__plus" aria-hidden="true">+</span>
           <span>Изображение</span>
-          <input class="ttr-file-picker__input" type="file"
-                 name="ttr_image_file" accept="image/*">
-        </label>
-
-        <label class="ttr-file-picker__card">
-          <span class="ttr-file-picker__plus" aria-hidden="true">+</span>
-          <span>Текст</span>
-          <input class="ttr-file-picker__input" type="file"
-                 name="ttr_text_file" accept=".txt,text/plain">
+          <input class="ttr-file-picker__input" type="file" accept="image/*">
         </label>
       </section>
 
       <section class="ttr-editor__card">
         <label>Название
-          <input name="work_title" value="{{ ttr_text.work_title }}">
+          <input name="work_title" maxlength="200" required
+                 value="{{ ttr_text.work_title if ttr_text else '' }}">
         </label>
 
         <label>Автор
-          <input name="author_name" value="{{ ttr_text.author_name }}">
+          <input name="author_name" maxlength="200" required
+                 value="{{ ttr_text.author_name if ttr_text else '' }}">
         </label>
 
         <label>Год публикации
-          <input type="number" name="publication_year"
-                 value="{{ ttr_text.publication_year }}">
+          <input type="number" name="publication_year" min="1" max="2100"
+                 value="{{ (ttr_text.publication_year or '') if ttr_text else '' }}">
         </label>
 
         <label>Краткое описание
-          <textarea name="short_description" rows="3">{{ ttr_text.short_description }}</textarea>
+          <textarea name="short_description" rows="3" maxlength="500"
+                    required>{{ ttr_text.short_description if ttr_text else '' }}</textarea>
         </label>
 
+        <label>Текст произведения
+          <textarea name="text_content" rows="9" required
+                    placeholder="Введите текст произведения">{{ ttr_text.text_content if ttr_text else '' }}</textarea>
+        </label>
+
+        {% if ttr_text %}
+          <div class="ttr-calculated" aria-label="Рассчитанные показатели">
+            <span><b>{{ ttr_text.text_length }}</b> токенов</span>
+            <span><b>{{ ttr_text.unique_token_count }}</b> уникальных</span>
+            <span><b>{{ ttr_text.ttr_ratio }}</b> TTR</span>
+          </div>
+        {% endif %}
+
+        <button class="ttr-button ttr-button--wide" type="submit">Опубликовать</button>
       </section>
     </form>
 

@@ -1,6 +1,6 @@
 <nav class="ttr-bottom-nav" aria-label="Основная навигация TTR">
   <a class="ttr-bottom-nav__item{% if ttr_active_feed %} ttr-bottom-nav__item--active{% endif %}"
-     href="/ttr-texts/1">
+     href="/ttr-texts/{{ ttr_feed_text_id or 1 }}">
     <span aria-hidden="true">▶</span>
     <span>Лента</span>
   </a>

@@ -17,13 +17,14 @@
     <form class="ttr-filter" action="/ttr-texts" method="get">
       <div class="ttr-filter__heading">
         <label for="ttr-min-text-length">Минимальная длина текста</label>
-        <output for="ttr-min-text-length">{{ min_text_length }} токенов</output>
+        <output id="ttr-selected-length" for="ttr-min-text-length">{{ min_text_length }} токенов</output>
       </div>
 
       <input class="ttr-filter__range" id="ttr-min-text-length"
              name="min_text_length" type="range"
              min="0" max="{{ max_text_length }}" step="1000"
-             value="{{ min_text_length }}" list="ttr-text-length-ticks">
+             value="{{ min_text_length }}" list="ttr-text-length-ticks"
+             oninput="document.getElementById('ttr-selected-length').value = this.value + ' токенов'">
 
       <datalist id="ttr-text-length-ticks">
         {% for tick in text_length_ticks %}
@@ -45,25 +46,30 @@
     {% if ttr_texts %}
       <section class="ttr-text-grid" aria-label="Опубликованные тексты">
         {% for ttr_text in ttr_texts %}
-          <a class="ttr-text-card"
-             href="/ttr-texts/{{ ttr_text.ttr_text_id }}"
-             data-ttr-video-url="{{ ttr_text.ttr_video_url }}">
-            <img src="{{ ttr_text.ttr_image_url }}"
-                 alt="Обложка произведения {{ ttr_text.work_title }}"
-                 loading="lazy">
-            <span class="ttr-text-card__body">
-              <span class="ttr-muted">{{ ttr_text.author_name }}</span>
-              <strong>{{ ttr_text.work_title }}</strong>
-              <span class="ttr-text-card__metric">
-                <span>Длина</span>
-                <b title="{{ ttr_text.text_length }} токенов">{{ ttr_text.compact_text_length }}</b>
+          <article class="ttr-text-card" data-ttr-video-url="{{ ttr_text.ttr_video_url }}">
+            <a class="ttr-text-card__link" href="/ttr-texts/{{ ttr_text.ttr_text_id }}">
+              <img src="{{ ttr_text.ttr_image_url }}"
+                   alt="Обложка произведения {{ ttr_text.work_title }}"
+                   onerror="this.onerror=null;this.src='/ttr-media/ttr-turgenev-fathers-sons.jpg'"
+                   loading="lazy">
+              <span class="ttr-text-card__body">
+                <span class="ttr-muted">{{ ttr_text.author_name }}</span>
+                <strong>{{ ttr_text.work_title }}</strong>
+                <span class="ttr-text-card__metric">
+                  <span>Длина</span>
+                  <b title="{{ ttr_text.text_length }} токенов">{{ ttr_text.compact_text_length }}</b>
+                </span>
+                <span class="ttr-text-card__metric">
+                  <span>Уникальных</span>
+                  <b title="{{ ttr_text.unique_token_count }} уникальных токенов">{{ ttr_text.compact_unique_token_count }}</b>
+                </span>
               </span>
-              <span class="ttr-text-card__metric">
-                <span>Уникальных</span>
-                <b title="{{ ttr_text.unique_token_count }} уникальных токенов">{{ ttr_text.compact_unique_token_count }}</b>
-              </span>
-            </span>
-          </a>
+            </a>
+            <form action="/ttr-texts/{{ ttr_text.ttr_text_id }}/delete" method="post">
+              <button class="ttr-card-delete" type="submit"
+                      aria-label="Удалить {{ ttr_text.work_title }}">Удалить</button>
+            </form>
+          </article>
         {% endfor %}
       </section>
     {% else %}

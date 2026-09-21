@@ -5,16 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Добавление текста для TTR-анализа">
   <title>{{ title }}</title>
-  <link rel="stylesheet" href="/ttr-assets/ttr_styles.css">
+  <link rel="stylesheet" href="/ttr-assets/ttr_styles.css?v=lab1-layout-sync">
 </head>
 <body class="ttr-page-body">
   <main class="ttr-phone ttr-page">
     <header class="ttr-page-header">
       <h1>Добавление</h1>
+      <p>Заполните данные нового текста.</p>
     </header>
 
     <form class="ttr-editor">
-      <section class="ttr-file-picker" aria-label="Выбор файлов текста">
+      <section class="ttr-file-picker ttr-file-picker--media" aria-label="Выбор медиа">
         <label class="ttr-file-picker__card">
           <span class="ttr-file-picker__plus" aria-hidden="true">+</span>
           <span>Видео</span>
@@ -27,13 +28,6 @@
           <span>Изображение</span>
           <input class="ttr-file-picker__input" type="file"
                  name="ttr_image_file" accept="image/*">
-        </label>
-
-        <label class="ttr-file-picker__card">
-          <span class="ttr-file-picker__plus" aria-hidden="true">+</span>
-          <span>Текст</span>
-          <input class="ttr-file-picker__input" type="file"
-                 name="ttr_text_file" accept=".txt,text/plain">
         </label>
       </section>
 
@@ -55,6 +49,9 @@
           <textarea name="short_description" rows="3">{{ ttr_text.short_description }}</textarea>
         </label>
 
+        <label>Текст произведения
+          <textarea name="text_content" rows="9">{{ ttr_text.text_content }}</textarea>
+        </label>
       </section>
     </form>
 

@@ -17,13 +17,14 @@
     <form class="ttr-filter" action="/ttr-texts" method="get">
       <div class="ttr-filter__heading">
         <label for="ttr-min-text-length">Минимальная длина текста</label>
-        <output for="ttr-min-text-length">{{ min_text_length }} токенов</output>
+        <output id="ttr-selected-length" for="ttr-min-text-length">{{ min_text_length }} токенов</output>
       </div>
 
       <input class="ttr-filter__range" id="ttr-min-text-length"
              name="min_text_length" type="range"
              min="0" max="{{ max_text_length }}" step="1000"
-             value="{{ min_text_length }}" list="ttr-text-length-ticks">
+             value="{{ min_text_length }}" list="ttr-text-length-ticks"
+             oninput="document.getElementById('ttr-selected-length').value = this.value + ' токенов'">
 
       <datalist id="ttr-text-length-ticks">
         {% for tick in text_length_ticks %}

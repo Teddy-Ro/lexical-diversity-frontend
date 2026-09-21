@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Лента текстов для TTR-анализа">
   <title>{{ title }}</title>
-  <link rel="stylesheet" href="/ttr-assets/ttr_styles.css">
+  <link rel="stylesheet" href="/ttr-assets/ttr_styles.css?v=lab1-layout-sync">
 </head>
 <body class="ttr-page-body ttr-feed-body">
   <main class="ttr-phone ttr-phone--feed">
@@ -44,14 +44,7 @@
 
       <section class="ttr-feed-copy">
         <h1>{{ ttr_text.work_title }}</h1>
-        <input class="ttr-feed-copy__toggle" type="checkbox"
-               id="ttr-description-{{ ttr_text.ttr_text_id }}">
         <p class="ttr-feed-copy__description">{{ ttr_text.short_description }}</p>
-        <label class="ttr-feed-copy__more"
-               for="ttr-description-{{ ttr_text.ttr_text_id }}">
-          <span class="ttr-feed-copy__more-label">Ещё</span>
-          <span class="ttr-feed-copy__less-label">Скрыть</span>
-        </label>
       </section>
     </article>
 

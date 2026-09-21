@@ -13,7 +13,7 @@
 Основные файлы:
 
 - `templates/ttr_feed.html` — вертикальная лента;
-- `templates/ttr_add.html` — выбор файлов фото, видео и текста;
+- `templates/ttr_add.html` — единая форма с выбором фото и видео и полем текста;
 - `templates/ttr_grid.html` — плитка с фильтром длины текста;
 - `templates/_ttr_bottom_nav.html` — нижняя навигация;
 - `public/ttr_styles.css` — общие стили;

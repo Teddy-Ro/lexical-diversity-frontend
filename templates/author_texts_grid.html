@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Корпус текстов для TTR-анализа">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="/author_texts-assets/author_texts_styles.css">
+</head>
+<body class="author_texts-page-body">
+  <main class="author_texts-phone author_texts-page">
+    <header class="author_texts-hero">
+      <h1>Корпус текстов</h1>
+      <p>Сравните длину и словарный состав произведений.</p>
+    </header>
+
+    <form class="author_texts-filter" action="/author_texts" method="get">
+      <div class="author_texts-filter__heading">
+        <label for="author_texts-min-text-length">Минимальная длина текста</label>
+        <output id="author_texts-selected-length" for="author_texts-min-text-length">Применено: {{ min_text_length }} токенов</output>
+      </div>
+
+      <input class="author_texts-filter__range" id="author_texts-min-text-length"
+             name="min_text_length" type="range"
+             min="0" max="{{ max_text_length }}" step="1000"
+             value="{{ min_text_length }}" list="author_texts-text-length-ticks">
+
+      <datalist id="author_texts-text-length-ticks">
+        {% for tick in text_length_ticks %}
+          <option value="{{ tick.value }}" label="{{ tick.label }}"></option>
+        {% endfor %}
+      </datalist>
+
+      <div class="author_texts-filter__scale" aria-hidden="true">
+        <span>0</span>
+        <span>{{ max_text_length_compact }}</span>
+      </div>
+
+      <div class="author_texts-filter__actions">
+        <button class="author_texts-button" type="submit">Применить</button>
+        <a class="author_texts-button" href="/author_texts">Сбросить</a>
+      </div>
+    </form>
+
+    {% if author_texts %}
+      <section class="author_texts-text-grid" aria-label="Опубликованные тексты">
+        {% for author_texts_text in author_texts %}
+          <article class="author_texts-text-card" data-author_texts-video-url="{{ author_texts_text.author_texts_video_url }}">
+            <a class="author_texts-text-card__link" href="/author_texts/{{ author_texts_text.author_text_id }}">
+              <img src="{{ author_texts_text.author_texts_image_url }}"
+                   alt="Обложка произведения {{ author_texts_text.work_title }}"
+                   loading="lazy">
+              <span class="author_texts-text-card__body">
+                <span class="author_texts-muted">{{ author_texts_text.author_name }}</span>
+                <strong>{{ author_texts_text.work_title }}</strong>
+                <span class="author_texts-text-card__metric">
+                  <span>Длина</span>
+                  <b title="{{ author_texts_text.text_length }} токенов">{{ author_texts_text.compact_text_length }}</b>
+                </span>
+                <span class="author_texts-text-card__metric">
+                  <span>Уникальных</span>
+                  <b title="{{ author_texts_text.unique_token_count }} уникальных токенов">{{ author_texts_text.compact_unique_token_count }}</b>
+                </span>
+              </span>
+            </a>
+            <form action="/author_texts/{{ author_texts_text.author_text_id }}/delete" method="post">
+              <button class="author_texts-button author_texts-button--wide" type="submit"
+                      aria-label="Удалить {{ author_texts_text.work_title }}">Удалить</button>
+            </form>
+          </article>
+        {% endfor %}
+      </section>
+    {% else %}
+      <section class="author_texts-empty-state">
+        <strong>Тексты не найдены</strong>
+        <p>Уменьшите минимальную длину текста.</p>
+      </section>
+    {% endif %}
+
+    {% include "_author_texts_bottom_nav.html" %}
+  </main>
+</body>
+</html>

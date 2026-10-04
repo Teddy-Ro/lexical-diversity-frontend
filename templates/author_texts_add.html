@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Добавление текста для TTR-анализа">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="/author_texts-assets/author_texts_styles.css?v=lab2-add-media">
+</head>
+<body class="author_texts-page-body">
+  <main class="author_texts-phone author_texts-page">
+    <header class="author_texts-page-header">
+      <h1>Добавление</h1>
+      <p>{% if author_texts_text %}Заполните сведения о произведении и текст.{% else %}Укажите название и выберите фото и видео.{% endif %}</p>
+    </header>
+
+    <form class="author_texts-editor"
+          action="{% if author_texts_text %}/author_texts/{{ author_texts_text.author_text_id }}/publish{% else %}/author_texts/drafts{% endif %}"
+          method="post">
+      <section class="author_texts-draft-media" aria-label="Медиа произведения">
+        <video controls muted playsinline preload="metadata"
+               poster="{{ author_texts_text.author_texts_image_url if author_texts_text else author_texts_default_image_url }}">
+          <source src="{{ author_texts_text.author_texts_video_url if author_texts_text else author_texts_default_video_url }}" type="video/webm">
+        </video>
+        {% if not author_texts_text %}
+        <label class="author_texts-button author_texts-media-select">
+          <span aria-hidden="true">+</span>
+          <span>Выбрать видео</span>
+          <input class="author_texts-file-picker__input" type="file" accept="video/*">
+        </label>
+        {% endif %}
+
+        <img src="{{ author_texts_text.author_texts_image_url if author_texts_text else author_texts_default_image_url }}"
+             alt="{{ 'Обложка произведения ' ~ author_texts_text.work_title if author_texts_text else 'Стандартная обложка произведения' }}">
+        {% if not author_texts_text %}
+        <label class="author_texts-button author_texts-media-select">
+          <span aria-hidden="true">+</span>
+          <span>Выбрать изображение</span>
+          <input class="author_texts-file-picker__input" type="file" accept="image/*">
+        </label>
+        {% endif %}
+      </section>
+
+      <section class="author_texts-editor__card">
+        <label>Название
+          <input name="work_title" maxlength="200" required
+                 value="{{ author_texts_text.work_title if author_texts_text else '' }}">
+        </label>
+
+        {% if author_texts_text %}
+        <label>Автор
+          <input name="author_name" maxlength="200" required
+                 value="{{ author_texts_text.author_name or '' }}">
+        </label>
+
+        <label>Год публикации (необязательно)
+          <input type="number" name="publication_year" min="1" max="2100"
+                 value="{{ (author_texts_text.publication_year or '') if author_texts_text else '' }}">
+        </label>
+
+        <label>Краткое описание
+          <textarea name="short_description" rows="3" maxlength="500"
+                    required>{{ author_texts_text.short_description or '' }}</textarea>
+        </label>
+
+        <label>Текст произведения
+          <textarea name="text_content" rows="9" required
+                    placeholder="Введите текст произведения">{{ author_texts_text.text_content or '' }}</textarea>
+        </label>
+
+        {% endif %}
+
+        <button class="author_texts-button author_texts-button--wide" type="submit">{% if author_texts_text %}Опубликовать{% else %}Далее{% endif %}</button>
+      </section>
+    </form>
+
+    {% include "_author_texts_bottom_nav.html" %}
+  </main>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Лента текстов для TTR-анализа">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="/author_texts-assets/author_texts_styles.css?v=lab2-feed-layout-2">
+</head>
+<body class="author_texts-page-body author_texts-feed-body">
+  <main class="author_texts-phone author_texts-phone--feed">
+    <article class="author_texts-feed-card"
+             data-author_texts-image-url="{{ author_texts_text.author_texts_image_url }}"
+             data-author_texts-video-url="{{ author_texts_text.author_texts_video_url }}">
+      {% if author_texts_text.author_texts_video_url %}
+        <video class="author_texts-feed-card__video" autoplay muted loop playsinline
+               poster="{{ author_texts_text.author_texts_image_url }}">
+          <source src="{{ author_texts_text.author_texts_video_url }}" type="video/webm">
+          Ваш браузер не поддерживает видео.
+        </video>
+      {% else %}
+        <img class="author_texts-feed-card__video" src="{{ author_texts_text.author_texts_image_url }}"
+             alt="Обложка произведения {{ author_texts_text.work_title }}">
+      {% endif %}
+      <div class="author_texts-feed-card__shade"></div>
+
+      <aside class="author_texts-feed-rail" aria-label="Параметры текста">
+        <div class="author_texts-feed-rail__like" aria-label="Отметок нравится: {{ author_texts_text.author_texts_like_count }}">
+          <span class="author_texts-feed-rail__icon" aria-hidden="true">♥</span>
+          <strong>{{ author_texts_text.author_texts_like_count }}</strong>
+        </div>
+
+        <div class="author_texts-feed-rail__metric"
+             title="{{ author_texts_text.unique_token_count }} уникальных токенов">
+          <strong>{{ author_texts_text.compact_unique_token_count }}</strong>
+          <span>уник.<br>токенов</span>
+        </div>
+
+        <div class="author_texts-feed-rail__metric"
+             title="Длина текста: {{ author_texts_text.text_length }} токенов">
+          <strong>{{ author_texts_text.compact_text_length }}</strong>
+          <span>длина<br>текста</span>
+        </div>
+
+        <a class="author_texts-feed-rail__next"
+           href="/author_texts/{{ author_texts_text.author_text_id }}?next=true"
+           aria-label="Показать следующий текст">→</a>
+      </aside>
+
+      <section class="author_texts-feed-copy">
+        <h1>{{ author_texts_text.work_title }}</h1>
+        <p class="author_texts-feed-copy__description">{{ author_texts_text.short_description }}</p>
+      </section>
+    </article>
+
+    {% include "_author_texts_bottom_nav.html" %}
+  </main>
+</body>
+</html>

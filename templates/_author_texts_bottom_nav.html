@@ -1,0 +1,17 @@
+<nav class="author_texts-bottom-nav" aria-label="Основная навигация TTR">
+  <a class="author_texts-bottom-nav__item{% if author_texts_active_feed %} author_texts-bottom-nav__item--active{% endif %}"
+     href="/author_texts/{{ author_texts_feed_text_id or 1 }}">
+    <span aria-hidden="true">▶</span>
+    <span>Лента</span>
+  </a>
+  <a class="author_texts-bottom-nav__item{% if author_texts_active_add %} author_texts-bottom-nav__item--active{% endif %}"
+     href="/author_texts/add">
+    <span aria-hidden="true">＋</span>
+    <span>Добавить</span>
+  </a>
+  <a class="author_texts-bottom-nav__item{% if author_texts_active_grid %} author_texts-bottom-nav__item--active{% endif %}"
+     href="/author_texts">
+    <span aria-hidden="true">▦</span>
+    <span>Корпус</span>
+  </a>
+</nav>

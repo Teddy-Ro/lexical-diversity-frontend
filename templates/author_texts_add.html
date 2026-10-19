@@ -11,7 +11,7 @@
   <main class="author_texts-phone author_texts-page">
     <header class="author_texts-page-header">
       <h1>Добавление</h1>
-      <p>{% if author_texts_text %}Заполните сведения о произведении и текст.{% else %}Укажите название и выберите фото и видео.{% endif %}</p>
+      <p>{% if author_texts_text %}Укажите описание и количество токенов.{% else %}Укажите название и выберите фото и видео.{% endif %}</p>
     </header>
 
     <form class="author_texts-editor"
@@ -48,24 +48,18 @@
         </label>
 
         {% if author_texts_text %}
-        <label>Автор
-          <input name="author_name" maxlength="200" required
-                 value="{{ author_texts_text.author_name or '' }}">
-        </label>
-
-        <label>Год публикации (необязательно)
-          <input type="number" name="publication_year" min="1" max="2100"
-                 value="{{ (author_texts_text.publication_year or '') if author_texts_text else '' }}">
-        </label>
-
         <label>Краткое описание
           <textarea name="short_description" rows="3" maxlength="500"
                     required>{{ author_texts_text.short_description or '' }}</textarea>
         </label>
 
-        <label>Текст произведения
-          <textarea name="text_content" rows="9" required
-                    placeholder="Введите текст произведения">{{ author_texts_text.text_content or '' }}</textarea>
+        <label>Количество всех токенов
+          <input type="number" name="text_length" min="1" max="2147483647" step="1" required
+                 value="{{ author_texts_text.text_length or '' }}">
+        </label>
+        <label>Количество уникальных токенов
+          <input type="number" name="unique_token_count" min="1" max="2147483647" step="1" required
+                 value="{{ author_texts_text.unique_token_count or '' }}">
         </label>
 
         {% endif %}

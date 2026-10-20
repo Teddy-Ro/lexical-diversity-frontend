@@ -1,1 +1,10 @@
 .DS_Store
+/docs/
+/reports/
+/screenshots/
+*.doc
+*.docx
+*.pdf
+*.mdj
+*.drawio
+~$*
